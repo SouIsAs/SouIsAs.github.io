@@ -1,1 +1,34 @@
 
+name: Nightly Script
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Download file
+      run: wget -O hosts https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts
+    - name: Manipulate file
+      run: |
+        sed -i '/reddit/d' hosts > hosts1;
+        sed -i '/redd.it/d' hosts1 > hosts2;
+        sed -i '/pinpages/d' hosts2 > hosts3;
+        sed -i '/allotalk/d' hosts3 > hosts4;
+    - name: Rename file
+      run: mv hosts4 hosts
+    - name: Configure git
+      run: |
+        git config user.email "github-actions@github.com"
+        git config user.name "Github Actions"
+    - name: Commit and push changes
+      env:
+        GITHUB_TOKEN: ${{ secrets.BLOCKLIST }}
+      run: |
+        date=$( date '+%F_%H:%M:%S' )
+        git add original_file.txt
+        git commit -m "blocklist $date"
+        git push
