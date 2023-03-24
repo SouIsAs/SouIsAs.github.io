@@ -22,10 +22,10 @@ jobs:
       run: wget -O hosts https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts
     - name: Manipulate file
       run: |
-        sed -i '/reddit/d' hosts > hosts1;
-        sed -i '/redd.it/d' hosts1 > hosts2;
-        sed -i '/pinpages/d' hosts2 > hosts3;
-        sed -i '/allotalk/d' hosts3 > hosts4;
+        sed -i '/reddit/d' hosts
+        sed -i '/redd.it/d' hosts
+        sed -i '/pinpages/d' hosts
+        sed -i '/allotalk/d' hosts
     - name: Rename file
       run: mv hosts4 hosts
     - name: Configure git
