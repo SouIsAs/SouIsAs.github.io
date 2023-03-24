@@ -1,5 +1,8 @@
 name: Nightly Script
 
+env:
+  ACTIONS_STEP_DEBUG: true
+
 on:
   schedule:
     - cron: "0 0 * * *" # run daily at midnight
