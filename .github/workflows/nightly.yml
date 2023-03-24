@@ -26,8 +26,6 @@ jobs:
         sed -i '/redd.it/d' hosts
         sed -i '/pinpages/d' hosts
         sed -i '/allotalk/d' hosts
-    - name: Rename file
-      run: mv hosts4 hosts
     - name: Configure git
       run: |
         git config user.email "github-actions@github.com"
